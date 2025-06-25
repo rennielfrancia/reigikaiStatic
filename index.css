@@ -1,3 +1,97 @@
+/* Menu Highlighting for Tournament Registration */
+.u-menu .u-nav-item a[href="2025-Las-Vegas-Open.html"] {
+  position: relative;
+  background: linear-gradient(45deg, #ff6b35, #f7931e);
+  color: white !important;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 8px 15px !important;
+  margin: 0 5px;
+  box-shadow: 0 2px 10px rgba(255, 107, 53, 0.4);
+  animation: pulseGlow 2s infinite;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.u-menu .u-nav-item a[href="2025-Las-Vegas-Open.html"]:hover {
+  background: linear-gradient(45deg, #ff8c5a, #ffa640);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.6);
+}
+
+.u-menu .u-nav-item a[href="2025-Las-Vegas-Open.html"]:after {
+  content: "NEW";
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff0000;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: bold;
+  animation: blink 1.5s infinite;
+  z-index: 10;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 2px 10px rgba(255, 107, 53, 0.4);
+  }
+  50% {
+    box-shadow: 0 2px 20px rgba(255, 107, 53, 0.7);
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulseGlowMobile {
+  0%, 100% {
+    box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+  }
+  50% {
+    box-shadow: 0 2px 20px rgba(255, 107, 53, 0.6);
+  }
+}
+
+/* Mobile Menu Highlighting */
+.u-sidenav .u-nav-item a[href="2025-Las-Vegas-Open.html"] {
+  position: relative;
+  background: linear-gradient(45deg, #ff6b35, #f7931e);
+  color: white !important;
+  font-weight: bold;
+  border-radius: 15px;
+  padding: 12px 20px !important;
+  margin: 5px 0;
+  box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+  animation: pulseGlowMobile 2s infinite;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+}
+
+.u-sidenav .u-nav-item a[href="2025-Las-Vegas-Open.html"]:after {
+  content: "🔥 NEW";
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  background: #ff0000;
+  color: white;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+  animation: blink 1.5s infinite;
+  z-index: 10;
+}
+
  .u-section-1 {
   background-image: url("images/yyy.jpg");
   background-position: 50% 50%;
