@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://702karatedo.com/sitemap.xml
+
+# Crawl delay (optional, helps prevent overloading server)
+Crawl-delay: 1 
