@@ -75,9 +75,36 @@
             if (iframe) {
                 let lastActivity = Date.now();
                 
+                // Force initial height on page load
+                function enforceInitialHeight() {
+                    console.log('🔧 Enforcing initial iframe height: 4500px');
+                    iframe.style.height = '4500px';
+                    iframe.style.minHeight = '4500px';
+                    iframe.setAttribute('height', '4500');
+                    
+                    // Also ensure container heights
+                    const formGroup = document.querySelector('.u-group-2');
+                    if (formGroup) {
+                        formGroup.style.minHeight = '4540px';
+                    }
+                    
+                    const groupContainer = document.querySelector('.u-container-layout-3');
+                    if (groupContainer) {
+                        groupContainer.style.minHeight = '4520px';
+                    }
+                }
+                
+                // Apply immediately
+                enforceInitialHeight();
+                
+                // Apply again after a short delay to override any Google Forms resizing
+                setTimeout(enforceInitialHeight, 100);
+                setTimeout(enforceInitialHeight, 500);
+                setTimeout(enforceInitialHeight, 1000);
+                
                 // Enhanced dynamic height resizing with multiple detection strategies
                 let lastHeight = iframe.offsetHeight;
-                let originalHeight = 3400;
+                let originalHeight = 4500;
                 let resizeAttempts = 0;
                 let formSubmittedResize = false;
                 
@@ -85,28 +112,55 @@
                     console.log(`🔄 RESIZING: ${newHeight}px. Reason: ${reason}`);
                     console.log(`📏 Before resize - Iframe height: ${iframe.offsetHeight}px`);
                     
-                    // Resize the iframe itself
-                    iframe.style.height = newHeight + 'px';
+                    // Force resize with !important by updating CSS rules
+                    const existingStyle = document.querySelector('#dynamic-iframe-style');
+                    if (existingStyle) {
+                        existingStyle.remove();
+                    }
+                    
+                    const dynamicStyle = document.createElement('style');
+                    dynamicStyle.id = 'dynamic-iframe-style';
+                    dynamicStyle.textContent = `
+                        iframe[src*="docs.google.com/forms"] {
+                            height: ${newHeight}px !important;
+                            min-height: ${newHeight}px !important;
+                            max-height: ${newHeight}px !important;
+                        }
+                        
+                        .u-group-2 {
+                            min-height: ${newHeight + 40}px !important;
+                        }
+                        
+                        .u-container-layout-3 {
+                            min-height: ${newHeight + 20}px !important;
+                        }
+                    `;
+                    document.head.appendChild(dynamicStyle);
+                    
+                    // Also set inline styles as backup
+                    iframe.style.setProperty('height', newHeight + 'px', 'important');
+                    iframe.style.setProperty('min-height', newHeight + 'px', 'important');
+                    iframe.style.setProperty('max-height', newHeight + 'px', 'important');
                     iframe.setAttribute('height', newHeight);
                     
                     // Update the container group
                     const formGroup = document.querySelector('.u-group-2');
                     if (formGroup) {
                         const oldHeight = formGroup.style.minHeight;
-                        formGroup.style.minHeight = (newHeight + 40) + 'px';
-                        console.log(`📦 Form group: ${oldHeight} → ${formGroup.style.minHeight}`);
+                        formGroup.style.setProperty('min-height', (newHeight + 40) + 'px', 'important');
+                        console.log(`📦 Form group: ${oldHeight} → ${newHeight + 40}px`);
                     }
                     
                     // Update the layout container
                     const groupContainer = document.querySelector('.u-container-layout-3');
                     if (groupContainer) {
                         const oldHeight = groupContainer.style.minHeight;
-                        groupContainer.style.minHeight = (newHeight + 20) + 'px';
-                        console.log(`📦 Layout container: ${oldHeight} → ${groupContainer.style.minHeight}`);
+                        groupContainer.style.setProperty('min-height', (newHeight + 20) + 'px', 'important');
+                        console.log(`📦 Layout container: ${oldHeight} → ${newHeight + 20}px`);
                     }
                     
-                    // Update CSS variables if they exist
-                    document.documentElement.style.setProperty('--iframe-height', newHeight + 'px');
+                    // Force a reflow
+                    iframe.offsetHeight;
                     
                     resizeAttempts++;
                     
@@ -115,8 +169,17 @@
                         console.log(`✅ After resize - Iframe height: ${iframe.offsetHeight}px (Attempt #${resizeAttempts})`);
                         if (Math.abs(iframe.offsetHeight - newHeight) > 50) {
                             console.warn(`⚠️ Resize may not have worked properly. Expected: ${newHeight}px, Actual: ${iframe.offsetHeight}px`);
+                            
+                            // Try one more time with even more force
+                            iframe.style.cssText = `
+                                height: ${newHeight}px !important;
+                                min-height: ${newHeight}px !important;
+                                max-height: ${newHeight}px !important;
+                                border-radius: 8px;
+                                width: 100%;
+                            `;
                         }
-                    }, 100);
+                    }, 200);
                 }
                 
                 // Simplified automatic detection (limited by cross-origin restrictions)
@@ -248,28 +311,68 @@
                 
                 document.body.appendChild(controlPanel);
                 
-                // Button functionality
-                document.getElementById('shrinkForm').addEventListener('click', function() {
-                    resizeIframe(700, 'Manual: Form submitted');
-                    formSubmittedResize = true;
-                    this.style.background = '#28a745';
-                    this.innerHTML = '✅ Resized!';
-                    setTimeout(() => {
-                        this.style.background = '#ff6b35';
-                        this.innerHTML = '✅ Form Submitted';
-                    }, 2000);
-                });
+                // Wait a moment for DOM to be ready, then attach event listeners
+                setTimeout(function() {
+                    console.log('🔧 Attaching button event listeners...');
                 
-                document.getElementById('expandForm').addEventListener('click', function() {
-                    resizeIframe(3400, 'Manual: Show full form');
-                    formSubmittedResize = false;
-                    this.style.background = '#28a745';
-                    this.innerHTML = '📝 Expanded!';
-                    setTimeout(() => {
-                        this.style.background = '#478ac9';
-                        this.innerHTML = '📝 Show Full Form';
-                    }, 2000);
-                });
+                // Button functionality with error handling
+                const shrinkButton = document.getElementById('shrinkForm');
+                if (shrinkButton) {
+                    shrinkButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log('🔴 Form Submitted button clicked!');
+                        
+                        try {
+                            resizeIframe(700, 'Manual: Form submitted');
+                            formSubmittedResize = true;
+                            this.style.background = '#28a745';
+                            this.innerHTML = '✅ Resized!';
+                            console.log('✅ Form resize to 700px completed');
+                            
+                            setTimeout(() => {
+                                this.style.background = '#ff6b35';
+                                this.innerHTML = '✅ Form Submitted';
+                            }, 2000);
+                        } catch (error) {
+                            console.error('❌ Error in Form Submitted button:', error);
+                            this.style.background = '#dc3545';
+                            this.innerHTML = '❌ Error';
+                        }
+                    });
+                    console.log('✅ Form Submitted button event listener attached');
+                } else {
+                    console.error('❌ Could not find shrinkForm button');
+                }
+                
+                const expandButton = document.getElementById('expandForm');
+                if (expandButton) {
+                    expandButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log('🔵 Show Full Form button clicked!');
+                        
+                        try {
+                            resizeIframe(4500, 'Manual: Show full form');
+                            formSubmittedResize = false;
+                            this.style.background = '#28a745';
+                            this.innerHTML = '📝 Expanded!';
+                            console.log('✅ Form resize to 4500px completed');
+                            
+                            setTimeout(() => {
+                                this.style.background = '#478ac9';
+                                this.innerHTML = '📝 Show Full Form';
+                            }, 2000);
+                        } catch (error) {
+                            console.error('❌ Error in Show Full Form button:', error);
+                            this.style.background = '#dc3545';
+                            this.innerHTML = '❌ Error';
+                        }
+                    });
+                    console.log('✅ Show Full Form button event listener attached');
+                } else {
+                    console.error('❌ Could not find expandForm button');
+                }
+                
+                }, 100); // End of setTimeout for button event listeners
                 
                 // Panel toggle functionality
                 let panelVisible = true;
@@ -321,12 +424,27 @@
                     <div>After submitting the form, use the "Form Submitted" button in the bottom-right to resize the form area.</div>
                 `;
                 
-                // Add slide-in animation
+                // Add slide-in animation and iframe height enforcement
                 const style = document.createElement('style');
                 style.textContent = `
                     @keyframes slideIn {
                         from { transform: translateX(100%); opacity: 0; }
                         to { transform: translateX(0); opacity: 1; }
+                    }
+                    
+                    /* Force iframe height on initial load */
+                    iframe[src*="docs.google.com/forms"] {
+                        height: 4500px !important;
+                        min-height: 4500px !important;
+                    }
+                    
+                    /* Ensure container accommodates the iframe */
+                    .u-group-2 {
+                        min-height: 4540px !important;
+                    }
+                    
+                    .u-container-layout-3 {
+                        min-height: 4520px !important;
                     }
                 `;
                 document.head.appendChild(style);
@@ -486,13 +604,12 @@
         </div>
         <div class="u-align-center u-container-style u-group u-white u-group-2">
           <div class="u-container-layout u-container-layout-3">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSczVayJ8XviajFAvVmLD6jrBrNSDlrzAKRrrZKqW4s7Ep-Cng/viewform?embedded=true" width="100%" height="3400" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 8px;">Loading…</iframe>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSczVayJ8XviajFAvVmLD6jrBrNSDlrzAKRrrZKqW4s7Ep-Cng/viewform?embedded=true" width="100%" height="4500" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 8px; height: 4500px !important; min-height: 4500px;">Loading…</iframe>
           </div>
         </div>
         <p class="u-align-center u-text u-text-default u-text-5">
-          For more information, contact:<br>
-          702-493-5253 - Sensei Ron<br>
-          702-588-3460 - Sensei Joseph<br>
+          For registration support - email us at<br>
+          <a href="mailto:reigikai@gmail.com">reigikai@gmail.com</a> or contact <a href="tel:702-972-6595">702-972-6595</a>
         </p>
       </div>
     </section>
