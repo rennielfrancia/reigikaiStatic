@@ -1,4 +1,121 @@
- /* Menu Highlighting for Tournament Registration */
+/* Dropdown Menu Styles */
+.u-has-submenu {
+  position: relative;
+}
+
+.u-submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  min-width: 150px;
+  z-index: 1000;
+  padding: 8px 0;
+}
+
+.u-has-submenu:hover .u-submenu {
+  display: block;
+}
+
+.u-submenu .u-nav-item {
+  display: block;
+  margin: 0;
+}
+
+.u-submenu .u-nav-link {
+  display: block;
+  padding: 8px 15px !important;
+  color: #333 !important;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  border-radius: 0;
+}
+
+.u-submenu .u-nav-link:hover {
+  background-color: #f8f9fa;
+  color: #478ac9 !important;
+}
+
+/* Mobile dropdown styles */
+@media (max-width: 991px) {
+  .u-submenu {
+    position: static;
+    display: none;
+    box-shadow: none;
+    background: transparent;
+    padding: 0;
+    margin-left: 20px;
+  }
+  
+  .u-has-submenu:hover .u-submenu {
+    display: none;
+  }
+  
+  .u-has-submenu.active .u-submenu {
+    display: block;
+  }
+  
+  .u-submenu .u-nav-link {
+    color: white !important;
+    padding: 5px 15px !important;
+  }
+  
+  .u-submenu .u-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white !important;
+  }
+  
+  /* Better mobile submenu styling */
+  .u-nav-container-collapse .u-nav-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .u-nav-container-collapse .u-nav-item:last-child .u-nav-link {
+    border-bottom: none;
+  }
+  
+  /* Style for Dojo Kun as submenu item */
+  .u-nav-container-collapse .u-nav-item:last-child {
+    background: rgba(255, 255, 255, 0.05);
+    margin: 5px 0;
+    border-radius: 8px;
+    padding-left: 15px;
+  }
+  
+  .u-nav-container-collapse .u-nav-item:last-child .u-nav-link {
+    font-size: 0.9em;
+    opacity: 0.9;
+    position: relative;
+  }
+  
+  .u-nav-container-collapse .u-nav-item:last-child .u-nav-link::before {
+    content: "→ ";
+    margin-right: 8px;
+    opacity: 0.7;
+  }
+
+  /* Mobile Menu Styles */
+  .u-custom-menu.u-nav-container-collapse .u-nav-2 .u-nav-item:nth-child(7),
+  .u-custom-menu.u-nav-container-collapse .u-nav-2 .u-nav-item:nth-child(8) {
+    padding-left: 20px;
+    background-color: rgba(116, 185, 255, 0.1);
+    border-left: 3px solid #74b9ff;
+    margin: 5px 0;
+    font-size: 0.9em;
+  }
+  
+  .u-custom-menu.u-nav-container-collapse .u-nav-2 .u-nav-item:nth-child(7)::before,
+  .u-custom-menu.u-nav-container-collapse .u-nav-2 .u-nav-item:nth-child(8)::before {
+    content: "→ ";
+    color: #74b9ff;
+    margin-right: 5px;
+  }
+}
+
+/* Menu Highlighting for Tournament Registration */
 .u-menu .u-nav-item a[href="2025-Las-Vegas-Open.html"] {
   position: relative;
   background: linear-gradient(45deg, #ff6b35, #f7931e);
@@ -140,4 +257,22 @@
   .u-section-1 .u-text-2 {
     width: 340px;
   }
+}
+
+/* Override nicepage.css double arrow issue */
+.u-dropdown-icon .u-nav-link:first-child:nth-last-child(2):after {
+  content: none !important;
+}
+
+.u-dropdown-icon .u-nav-container .u-nav-popup .u-nav-link:first-child:nth-last-child(2):after {
+  content: none !important;
+}
+
+/* Additional override for mobile menu double arrow */
+.u-nav-container-collapse .u-nav-item:nth-last-child(2) .u-nav-link::before {
+  content: none !important;
+}
+
+.u-nav-container-collapse .u-nav-item:nth-last-child(2) .u-nav-link::after {
+  content: none !important;
 }
