@@ -1,8 +1,35 @@
 User-agent: *
 Allow: /
 
+# Disallow unnecessary files and directories
+Disallow: /nicepage.js
+Disallow: /jquery.js
+Disallow: /*.css$
+Disallow: /intlTelInput/
+Disallow: /deploy.ps1
+Disallow: /*.docx$
+
+# Allow important pages explicitly
+Allow: /index.html
+Allow: /About.html
+Allow: /Contact.html
+Allow: /Private-Lessons.html
+Allow: /Tournament.html
+Allow: /Team-Calendar.html
+Allow: /2025-Las-Vegas-Open.html
+Allow: /Tournament-Rules.html
+Allow: /Bulk-Registration.html
+Allow: /karate-classes-clark-county.html
+Allow: /Dojo-Kun.html
+Allow: /Kata-List.html
+Allow: /images/
+
 # Sitemap location
 Sitemap: https://702karatedo.com/sitemap.xml
 
 # Crawl delay (optional, helps prevent overloading server)
-Crawl-delay: 1 
+Crawl-delay: 1
+
+# Additional sitemaps (if you add them in the future)
+# Sitemap: https://702karatedo.com/sitemap-images.xml
+# Sitemap: https://702karatedo.com/sitemap-news.xml
