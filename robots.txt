@@ -6,7 +6,6 @@ Disallow: /nicepage.js
 Disallow: /jquery.js
 Disallow: /*.css$
 Disallow: /intlTelInput/
-Disallow: /deploy.ps1
 Disallow: /*.docx$
 
 # Allow important pages explicitly
@@ -16,7 +15,7 @@ Allow: /Contact.html
 Allow: /Private-Lessons.html
 Allow: /Tournament.html
 Allow: /Team-Calendar.html
-Allow: /2025-Las-Vegas-Open.html
+Allow: /2026-Las-Vegas-Open.html
 Allow: /Tournament-Rules.html
 Allow: /Bulk-Registration.html
 Allow: /karate-classes-clark-county.html

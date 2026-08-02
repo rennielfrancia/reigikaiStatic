@@ -567,7 +567,7 @@
 }
 
 /* Active Menu Item Styling */
-.u-menu .u-nav-item a[href="2025-Las-Vegas-Open.html"] {
+.u-menu .u-nav-item a[href="2026-Las-Vegas-Open.html"] {
   position: relative;
   background: linear-gradient(45deg, #ff6b35, #f7931e);
   color: white !important;
@@ -581,13 +581,13 @@
   letter-spacing: 0.5px;
 }
 
-.u-menu .u-nav-item a[href="2025-Las-Vegas-Open.html"]:hover {
+.u-menu .u-nav-item a[href="2026-Las-Vegas-Open.html"]:hover {
   background: linear-gradient(45deg, #ff8c5a, #ffa640);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(255, 107, 53, 0.6);
 }
 
-.u-menu .u-nav-item a[href="2025-Las-Vegas-Open.html"]:after {
+.u-menu .u-nav-item a[href="2026-Las-Vegas-Open.html"]:after {
   content: "NEW";
   position: absolute;
   top: -8px;
@@ -630,7 +630,7 @@
 }
 
 /* Mobile Menu Highlighting */
-.u-sidenav .u-nav-item a[href="2025-Las-Vegas-Open.html"] {
+.u-sidenav .u-nav-item a[href="2026-Las-Vegas-Open.html"] {
   position: relative;
   background: linear-gradient(45deg, #ff6b35, #f7931e);
   color: white !important;
@@ -645,7 +645,7 @@
   display: block;
 }
 
-.u-sidenav .u-nav-item a[href="2025-Las-Vegas-Open.html"]:after {
+.u-sidenav .u-nav-item a[href="2026-Las-Vegas-Open.html"]:after {
   content: "🔥 NEW";
   position: absolute;
   top: -5px;

@@ -1,5 +1,5 @@
 /* Menu Highlighting for Tournament Registration */
-.u-menu .u-nav-item a[href="2025-Las-Vegas-Open.html"] {
+.u-menu .u-nav-item a[href="2026-Las-Vegas-Open.html"] {
   position: relative;
   background: linear-gradient(45deg, #ff6b35, #f7931e);
   color: white !important;
@@ -13,13 +13,13 @@
   letter-spacing: 0.5px;
 }
 
-.u-menu .u-nav-item a[href="2025-Las-Vegas-Open.html"]:hover {
+.u-menu .u-nav-item a[href="2026-Las-Vegas-Open.html"]:hover {
   background: linear-gradient(45deg, #ff8c5a, #ffa640);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(255, 107, 53, 0.6);
 }
 
-.u-menu .u-nav-item a[href="2025-Las-Vegas-Open.html"]:after {
+.u-menu .u-nav-item a[href="2026-Las-Vegas-Open.html"]:after {
   content: "NEW";
   position: absolute;
   top: -8px;
@@ -62,7 +62,7 @@
 }
 
 /* Mobile Menu Highlighting */
-.u-sidenav .u-nav-item a[href="2025-Las-Vegas-Open.html"] {
+.u-sidenav .u-nav-item a[href="2026-Las-Vegas-Open.html"] {
   position: relative;
   background: linear-gradient(45deg, #ff6b35, #f7931e);
   color: white !important;
@@ -77,7 +77,7 @@
   display: block;
 }
 
-.u-sidenav .u-nav-item a[href="2025-Las-Vegas-Open.html"]:after {
+.u-sidenav .u-nav-item a[href="2026-Las-Vegas-Open.html"]:after {
   content: "🔥 NEW";
   position: absolute;
   top: -5px;
@@ -158,8 +158,7 @@
   background-image: none;
 }
 
-.u-section-2 .u-sheet-1 {
-  min-height: 983px;
+$11200px;
 }
 
 .u-section-2 .u-layout-wrap-1 {
@@ -191,14 +190,30 @@
 }
 
 .u-section-2 .u-image-1 {
-  min-height: 753px;
-  background-image: url("images/reigikai-in-dojo-web.png");
-  background-position: 50% 50%;
+  min-height: 1100px;
   --animation-custom_in-translate_x: 300px;
   --animation-custom_in-translate_y: 0px;
   --animation-custom_in-opacity: 0;
   --animation-custom_in-rotate: 0deg;
   --animation-custom_in-scale: 1;
+}
+
+.u-section-2 .flyer-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 100%;
+  padding: 20px 10px;
+}
+
+.u-section-2 .flyer-pair img {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  display: block;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .u-section-2 .u-container-layout-2 {
@@ -304,30 +319,294 @@
 }
 
 .u-section-3 .u-sheet-1 {
-  min-height: 610px;
+  min-height: 983px;
+}
+
+.u-section-3 .u-layout-wrap-1 {
+  margin-top: 70px;
+  margin-bottom: 60px;
+}
+
+.u-section-3 .u-layout-cell-1 {
+  min-height: 753px;
+}
+
+.u-section-3 .u-container-layout-1 {
+  padding: 30px;
+}
+
+.u-section-3 .u-text-1 {
+  font-size: 3.75rem;
+  --animation-custom_in-translate_x: -200px;
+  --animation-custom_in-translate_y: 0px;
+  --animation-custom_in-opacity: 0;
+  --animation-custom_in-rotate: 0deg;
+  --animation-custom_in-scale: 1;
+  margin: 142px 0 0;
+}
+
+.u-section-3 .u-text-2 {
+  font-size: 1.125rem;
+  margin: 21px 0 0 67px;
+}
+
+.u-section-3 .u-image-1 {
+  min-height: 753px;
+  background-image: url("images/2025-las-vegas-open-flyer.png");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  --animation-custom_in-translate_x: 300px;
+  --animation-custom_in-translate_y: 0px;
+  --animation-custom_in-opacity: 0;
+  --animation-custom_in-rotate: 0deg;
+  --animation-custom_in-scale: 1;
+}
+
+.u-section-3 .u-container-layout-2 {
+  padding: 30px;
 }
 
 @media (max-width: 1199px) {
   .u-section-3 .u-sheet-1 {
-    min-height: 528px;
+    min-height: 558px;
+  }
+
+  .u-section-3 .u-layout-wrap-1 {
+    margin-bottom: -71px;
+  }
+
+  .u-section-3 .u-layout-cell-1 {
+    min-height: 621px;
+  }
+
+  .u-section-3 .u-text-2 {
+    margin-left: 105px;
+  }
+
+  .u-section-3 .u-image-1 {
+    min-height: 621px;
   }
 }
 
 @media (max-width: 991px) {
   .u-section-3 .u-sheet-1 {
-    min-height: 437px;
+    min-height: 587px;
+  }
+
+  .u-section-3 .u-layout-wrap-1 {
+    margin-bottom: 49px;
+  }
+
+  .u-section-3 .u-layout-cell-1 {
+    min-height: 100px;
+  }
+
+  .u-section-3 .u-text-1 {
+    font-size: 2.25rem;
+  }
+
+  .u-section-3 .u-text-2 {
+    font-size: 1rem;
+    margin-left: 0;
+  }
+
+  .u-section-3 .u-image-1 {
+    min-height: 476px;
   }
 }
 
 @media (max-width: 767px) {
   .u-section-3 .u-sheet-1 {
-    min-height: 908px;
+    min-height: 1058px;
+  }
+
+  .u-section-3 .u-container-layout-1 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-3 .u-image-1 {
+    min-height: 668px;
+  }
+
+  .u-section-3 .u-container-layout-2 {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
 @media (max-width: 575px) {
   .u-section-3 .u-sheet-1 {
-    min-height: 237px;
+    min-height: 817px;
+  }
+
+  .u-section-3 .u-layout-wrap-1 {
+    margin-top: 77px;
+  }
+
+  .u-section-3 .u-layout-cell-1 {
+    min-height: 250px;
+  }
+
+  .u-section-3 .u-container-layout-1 {
+    padding-top: 12px;
+  }
+
+  .u-section-3 .u-text-1 {
+    font-size: 1.875rem;
+    width: auto;
+    margin-top: 28px;
+    margin-right: 114px;
+  }
+
+  .u-section-3 .u-image-1 {
+    min-height: 441px;
+  }
+}
+
+.u-section-4 .u-sheet-1 {
+  min-height: 983px;
+}
+
+.u-section-4 .u-layout-wrap-1 {
+  margin-top: 70px;
+  margin-bottom: 60px;
+}
+
+.u-section-4 .u-layout-cell-1 {
+  min-height: 753px;
+}
+
+.u-section-4 .u-container-layout-1 {
+  padding: 30px;
+}
+
+.u-section-4 .u-text-1 {
+  font-size: 3.75rem;
+  --animation-custom_in-translate_x: -200px;
+  --animation-custom_in-translate_y: 0px;
+  --animation-custom_in-opacity: 0;
+  --animation-custom_in-rotate: 0deg;
+  --animation-custom_in-scale: 1;
+  margin: 142px 0 0;
+}
+
+.u-section-4 .u-text-2 {
+  font-size: 1.125rem;
+  margin: 21px 0 0 67px;
+}
+
+.u-section-4 .u-image-1 {
+  min-height: 753px;
+  background-image: url("images/reigikai-in-dojo-web.png");
+  background-position: 50% 50%;
+  --animation-custom_in-translate_x: 300px;
+  --animation-custom_in-translate_y: 0px;
+  --animation-custom_in-opacity: 0;
+  --animation-custom_in-rotate: 0deg;
+  --animation-custom_in-scale: 1;
+}
+
+.u-section-4 .u-container-layout-2 {
+  padding: 30px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-4 .u-sheet-1 {
+    min-height: 558px;
+  }
+
+  .u-section-4 .u-layout-wrap-1 {
+    margin-bottom: -71px;
+  }
+
+  .u-section-4 .u-layout-cell-1 {
+    min-height: 621px;
+  }
+
+  .u-section-4 .u-text-2 {
+    margin-left: 105px;
+  }
+
+  .u-section-4 .u-image-1 {
+    min-height: 621px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-4 .u-sheet-1 {
+    min-height: 587px;
+  }
+
+  .u-section-4 .u-layout-wrap-1 {
+    margin-bottom: 49px;
+  }
+
+  .u-section-4 .u-layout-cell-1 {
+    min-height: 100px;
+  }
+
+  .u-section-4 .u-text-1 {
+    font-size: 2.25rem;
+  }
+
+  .u-section-4 .u-text-2 {
+    font-size: 1rem;
+    margin-left: 0;
+  }
+
+  .u-section-4 .u-image-1 {
+    min-height: 476px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-4 .u-sheet-1 {
+    min-height: 1058px;
+  }
+
+  .u-section-4 .u-container-layout-1 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-4 .u-image-1 {
+    min-height: 668px;
+  }
+
+  .u-section-4 .u-container-layout-2 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-4 .u-sheet-1 {
+    min-height: 817px;
+  }
+
+  .u-section-4 .u-layout-wrap-1 {
+    margin-top: 77px;
+  }
+
+  .u-section-4 .u-layout-cell-1 {
+    min-height: 250px;
+  }
+
+  .u-section-4 .u-container-layout-1 {
+    padding-top: 12px;
+  }
+
+  .u-section-4 .u-text-1 {
+    font-size: 1.875rem;
+    width: auto;
+    margin-top: 28px;
+    margin-right: 114px;
+  }
+
+  .u-section-4 .u-image-1 {
+    min-height: 441px;
   }
 }
 
