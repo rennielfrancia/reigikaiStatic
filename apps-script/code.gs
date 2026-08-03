@@ -3,14 +3,14 @@
 // and replaces "Other" selections with free-text entries.
 // Not loaded by the static website — kept here for version control / edits.
 //
-// Form ID: 1ParlaBQqUhifqiWHyFnk-tyojxxG8_wUtr-Wfq-15kY
-// Spreadsheet ID: 1_ox1_IopSiFfPvlLjTrJVdjmtYND1NjXdtNBpuWUim4
+// Form ID: 1wmpmUTbWPKz-HoW43HQXeuTAXxbBHFcNNDi6Mjh1YV4
+// Spreadsheet ID: 1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4
 // Sheet: FormResponses
 
 function updateDojoNameDropdown() {
     // Google Form and Sheet setup
-    var formId = "1ParlaBQqUhifqiWHyFnk-tyojxxG8_wUtr-Wfq-15kY";  // Replace with your Google Form ID
-    var sheet = SpreadsheetApp.openById("1_ox1_IopSiFfPvlLjTrJVdjmtYND1NjXdtNBpuWUim4").getSheetByName("FormResponses"); // Sheet containing responses
+    var formId = "1wmpmUTbWPKz-HoW43HQXeuTAXxbBHFcNNDi6Mjh1YV4";  // Replace with your Google Form ID
+    var sheet = SpreadsheetApp.openById("1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4").getSheetByName("FormResponses"); // Sheet containing responses
     var dropdownColumn = 6;  // Column F: Dojo Name dropdown selections
     var newEntryColumn = 7;  // Column G: Free-text dojo name entries
 
@@ -58,8 +58,8 @@ function toPascalCase(str) {
 
 function updateInstructorNameDropdown() {
     // Google Form and Sheet setup
-    var formId = "1ParlaBQqUhifqiWHyFnk-tyojxxG8_wUtr-Wfq-15kY";  // Replace with your Google Form ID
-    var sheet = SpreadsheetApp.openById("1_ox1_IopSiFfPvlLjTrJVdjmtYND1NjXdtNBpuWUim4").getSheetByName("FormResponses"); // Sheet containing responses
+    var formId = "1wmpmUTbWPKz-HoW43HQXeuTAXxbBHFcNNDi6Mjh1YV4";  // Replace with your Google Form ID
+    var sheet = SpreadsheetApp.openById("1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4").getSheetByName("FormResponses"); // Sheet containing responses
     var dropdownColumn = 8;  // Column H: Instructor Name dropdown selections
     var newEntryColumn = 9;  // Column I: Free-text instructor name entries
 
@@ -107,7 +107,7 @@ function toPascalCase(str) {
 
 
 function replaceDojoWithUserInput() {    
-    var sheet = SpreadsheetApp.openById("1_ox1_IopSiFfPvlLjTrJVdjmtYND1NjXdtNBpuWUim4").getSheetByName("FormResponses"); // Adjust sheet name
+    var sheet = SpreadsheetApp.openById("1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4").getSheetByName("FormResponses"); // Adjust sheet name
     var dropdownColumn = 6;  // Adjust to match dropdown column (e.g., B)
     var otherColumn = 7;  // Adjust to match short-text column (e.g., C)
     var lastRow = sheet.getLastRow();
@@ -126,7 +126,7 @@ function replaceDojoWithUserInput() {
 }
 
 function replaceInstructorWithUserInput() {    
-    var sheet = SpreadsheetApp.openById("1_ox1_IopSiFfPvlLjTrJVdjmtYND1NjXdtNBpuWUim4").getSheetByName("FormResponses"); // Adjust sheet name
+    var sheet = SpreadsheetApp.openById("1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4").getSheetByName("FormResponses"); // Adjust sheet name
     var dropdownColumn = 8;  // Adjust to match dropdown column (e.g., B)
     var otherColumn = 9;  // Adjust to match short-text column (e.g., C)
     var lastRow = sheet.getLastRow();

@@ -8,7 +8,7 @@
 // Not loaded by the static website — kept here for version control / edits.
 //
 // Sheets: FormResponses, DivisionList
-// Spreadsheet ID: 1_ox1_IopSiFfPvlLjTrJVdjmtYND1NjXdtNBpuWUim4
+// Spreadsheet ID: 1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4
 //
 // DivisionList columns A–E: Code | Age range | Gender | Ranking | Event (Kata|Kumite)
 
@@ -24,7 +24,7 @@ var DIVISION_COLS = {
 };
 
 function assignDivisionCode() {
-  var ss = SpreadsheetApp.openById("1_ox1_IopSiFfPvlLjTrJVdjmtYND1NjXdtNBpuWUim4");
+  var ss = SpreadsheetApp.openById("1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4");
   var sheet = ss.getSheetByName("FormResponses");
   var divisionSheet = ss.getSheetByName("DivisionList");
   var lastRow = sheet.getLastRow();

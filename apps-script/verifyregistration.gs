@@ -3,7 +3,7 @@
 // Not loaded by the static website — kept here for version control / edits.
 //
 // Sheet: FormResponses
-// Spreadsheet ID: 1_ox1_IopSiFfPvlLjTrJVdjmtYND1NjXdtNBpuWUim4
+// Spreadsheet ID: 1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4
 
 // This handles GET requests (when someone visits the URL directly in browser)
 function doGet() {
@@ -23,7 +23,7 @@ function doPost(e) {
 
 // Your actual verification logic
 function verifyRegistration(e) {
-  var sheet = SpreadsheetApp.openById("1_ox1_IopSiFfPvlLjTrJVdjmtYND1NjXdtNBpuWUim4").getSheetByName("FormResponses");
+  var sheet = SpreadsheetApp.openById("1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4").getSheetByName("FormResponses");
   const paymentCode = e.parameter.paymentCode;
   
   const data = sheet.getDataRange().getValues();
