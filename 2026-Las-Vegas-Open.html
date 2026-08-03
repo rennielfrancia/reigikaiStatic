@@ -86,20 +86,20 @@
                 
                 // Force initial height on page load
                 function enforceInitialHeight() {
-                    console.log('=��� Enforcing initial iframe height: 13725px');
-                    iframe.style.height = '13725px';
-                    iframe.style.minHeight = '13725px';
-                    iframe.setAttribute('height', '13725');
+                    console.log('=��� Enforcing initial iframe height: 4500px');
+                    iframe.style.height = '4500px';
+                    iframe.style.minHeight = '4500px';
+                    iframe.setAttribute('height', '4500');
                     
                     // Also ensure container heights
                     const formGroup = document.querySelector('.u-group-2');
                     if (formGroup) {
-                        formGroup.style.minHeight = '13765px';
+                        formGroup.style.minHeight = '4540px';
                     }
                     
                     const groupContainer = document.querySelector('.u-container-layout-3');
                     if (groupContainer) {
-                        groupContainer.style.minHeight = '13745px';
+                        groupContainer.style.minHeight = '4520px';
                     }
                 }
                 
@@ -113,7 +113,7 @@
                 
                 // Enhanced dynamic height resizing with multiple detection strategies
                 let lastHeight = iframe.offsetHeight;
-                let originalHeight = 13725;
+                let originalHeight = 4500;
                 let resizeAttempts = 0;
                 let formSubmittedResize = false;
                 
@@ -360,11 +360,11 @@
                         console.log('=��� Show Full Form button clicked!');
                         
                         try {
-                            resizeIframe(13725, 'Manual: Show full form');
+                            resizeIframe(4500, 'Manual: Show full form');
                             formSubmittedResize = false;
                             this.style.background = '#28a745';
                             this.innerHTML = '=�� Expanded!';
-                            console.log('G�� Form resize to 13725px completed');
+                            console.log('G�� Form resize to 4500px completed');
                             
                             setTimeout(() => {
                                 this.style.background = '#478ac9';
@@ -443,17 +443,17 @@
                     
                     /* Force iframe height on initial load */
                     iframe[src*="docs.google.com/forms"] {
-                        height: 13725px !important;
-                        min-height: 13725px !important;
+                        height: 4500px !important;
+                        min-height: 4500px !important;
                     }
                     
                     /* Ensure container accommodates the iframe */
                     .u-group-2 {
-                        min-height: 13765px !important;
+                        min-height: 4540px !important;
                     }
                     
                     .u-container-layout-3 {
-                        min-height: 13745px !important;
+                        min-height: 4520px !important;
                     }
                 `;
                 document.head.appendChild(style);
@@ -678,7 +678,7 @@
         </div>
         <div class="u-align-center u-container-style u-group u-white u-group-2">
           <div class="u-container-layout u-container-layout-3">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd9Z4UBbpbIHWNfDU26C2f_kZeWY6WFJ_YXqzoC61edu8gGUg/viewform?embedded=true" width="100%" height="13725" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 8px; height: 13725px !important; min-height: 13725px;">Loading…</iframe>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd9Z4UBbpbIHWNfDU26C2f_kZeWY6WFJ_YXqzoC61edu8gGUg/viewform?embedded=true" width="100%" height="4500" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 8px; height: 4500px !important; min-height: 4500px;">Loading…</iframe>
           </div>
         </div>
         <p class="u-align-center u-text u-text-default u-text-5">
