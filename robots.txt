@@ -6,7 +6,9 @@ Disallow: /nicepage.js
 Disallow: /jquery.js
 Disallow: /*.css$
 Disallow: /intlTelInput/
+Disallow: /apps-script/
 Disallow: /*.docx$
+Disallow: /*.gs$
 
 # Allow important pages explicitly
 Allow: /index.html
