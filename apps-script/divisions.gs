@@ -13,10 +13,10 @@
 // DivisionList columns A–E: Code | Age range | Gender | Ranking | Event (Kata|Kumite)
 
 var DIVISION_COLS = {
-  GENDER: 3,             // C
-  AGE: 4,                // D
-  RANKING: 5,            // E
-  EVENT: 12,             // L
+  GENDER: 4,             // D
+  AGE: 5,                // E
+  RANKING: 6,            // F
+  EVENT: 13,             // M
   DIVISION_COMBINED: 17, // Q — original combined codes (before payment block R–X)
   // R–X reserved for payment plugin — do not write here
   DIVISION_KATA: 25,     // Y — Kata only

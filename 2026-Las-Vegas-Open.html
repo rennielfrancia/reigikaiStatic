@@ -19,18 +19,500 @@
     <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <script>
+        // Scroll to form start functionality
         document.addEventListener('DOMContentLoaded', function() {
+            // Function to scroll to start of embedded form
+            function scrollToFormStart() {
+                const formContainer = document.querySelector('.u-group-2');
+                if (formContainer) {
+                    formContainer.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+            
+            // Create back to top button
             const backToTopButton = document.createElement('button');
-            backToTopButton.innerHTML = '? Back to Top';
-            backToTopButton.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#478ac9;color:white;border:none;padding:12px 16px;border-radius:25px;cursor:pointer;font-size:14px;box-shadow:0 2px 10px rgba(0,0,0,0.3);z-index:1000;display:none;';
+            backToTopButton.innerHTML = 'G�� Back to Top';
+            backToTopButton.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #478ac9;
+                color: white;
+                border: none;
+                padding: 12px 16px;
+                border-radius: 25px;
+                cursor: pointer;
+                font-size: 14px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+                z-index: 1000;
+                display: none;
+                transition: opacity 0.3s ease;
+            `;
+            
+            // Add click event to button
             backToTopButton.addEventListener('click', function(e) {
                 e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                scrollToFormStart();
             });
+            
+            // Add button to page
             document.body.appendChild(backToTopButton);
+            
+            // Show/hide button based on scroll position
+            let ticking = false;
             window.addEventListener('scroll', function() {
-                backToTopButton.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+                if (!ticking) {
+                    requestAnimationFrame(function() {
+                        const scrollY = window.pageYOffset;
+                        // Show button when user has scrolled down 300px
+                        if (scrollY > 300) {
+                            backToTopButton.style.display = 'block';
+                        } else {
+                            backToTopButton.style.display = 'none';
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
             });
+            
+            // Advanced form submission detection with dynamic resizing
+            const iframe = document.querySelector('iframe');
+            if (iframe) {
+                let lastActivity = Date.now();
+                
+                // Force initial height on page load
+                function enforceInitialHeight() {
+                    console.log('=��� Enforcing initial iframe height: 13725px');
+                    iframe.style.height = '13725px';
+                    iframe.style.minHeight = '13725px';
+                    iframe.setAttribute('height', '13725');
+                    
+                    // Also ensure container heights
+                    const formGroup = document.querySelector('.u-group-2');
+                    if (formGroup) {
+                        formGroup.style.minHeight = '13765px';
+                    }
+                    
+                    const groupContainer = document.querySelector('.u-container-layout-3');
+                    if (groupContainer) {
+                        groupContainer.style.minHeight = '13745px';
+                    }
+                }
+                
+                // Apply immediately
+                enforceInitialHeight();
+                
+                // Apply again after a short delay to override any Google Forms resizing
+                setTimeout(enforceInitialHeight, 100);
+                setTimeout(enforceInitialHeight, 500);
+                setTimeout(enforceInitialHeight, 1000);
+                
+                // Enhanced dynamic height resizing with multiple detection strategies
+                let lastHeight = iframe.offsetHeight;
+                let originalHeight = 13725;
+                let resizeAttempts = 0;
+                let formSubmittedResize = false;
+                
+                function resizeIframe(newHeight, reason = '') {
+                    console.log(`=��� RESIZING: ${newHeight}px. Reason: ${reason}`);
+                    console.log(`=��� Before resize - Iframe height: ${iframe.offsetHeight}px`);
+                    
+                    // Force resize with !important by updating CSS rules
+                    const existingStyle = document.querySelector('#dynamic-iframe-style');
+                    if (existingStyle) {
+                        existingStyle.remove();
+                    }
+                    
+                    const dynamicStyle = document.createElement('style');
+                    dynamicStyle.id = 'dynamic-iframe-style';
+                    dynamicStyle.textContent = `
+                        iframe[src*="docs.google.com/forms"] {
+                            height: ${newHeight}px !important;
+                            min-height: ${newHeight}px !important;
+                            max-height: ${newHeight}px !important;
+                        }
+                        
+                        .u-group-2 {
+                            min-height: ${newHeight + 40}px !important;
+                        }
+                        
+                        .u-container-layout-3 {
+                            min-height: ${newHeight + 20}px !important;
+                        }
+                    `;
+                    document.head.appendChild(dynamicStyle);
+                    
+                    // Also set inline styles as backup
+                    iframe.style.setProperty('height', newHeight + 'px', 'important');
+                    iframe.style.setProperty('min-height', newHeight + 'px', 'important');
+                    iframe.style.setProperty('max-height', newHeight + 'px', 'important');
+                    iframe.setAttribute('height', newHeight);
+                    
+                    // Update the container group
+                    const formGroup = document.querySelector('.u-group-2');
+                    if (formGroup) {
+                        const oldHeight = formGroup.style.minHeight;
+                        formGroup.style.setProperty('min-height', (newHeight + 40) + 'px', 'important');
+                        console.log(`=�� Form group: ${oldHeight} G�� ${newHeight + 40}px`);
+                    }
+                    
+                    // Update the layout container
+                    const groupContainer = document.querySelector('.u-container-layout-3');
+                    if (groupContainer) {
+                        const oldHeight = groupContainer.style.minHeight;
+                        groupContainer.style.setProperty('min-height', (newHeight + 20) + 'px', 'important');
+                        console.log(`=�� Layout container: ${oldHeight} G�� ${newHeight + 20}px`);
+                    }
+                    
+                    // Force a reflow
+                    iframe.offsetHeight;
+                    
+                    resizeAttempts++;
+                    
+                    // Verify the resize worked
+                    setTimeout(() => {
+                        console.log(`G�� After resize - Iframe height: ${iframe.offsetHeight}px (Attempt #${resizeAttempts})`);
+                        if (Math.abs(iframe.offsetHeight - newHeight) > 50) {
+                            console.warn(`G��n+� Resize may not have worked properly. Expected: ${newHeight}px, Actual: ${iframe.offsetHeight}px`);
+                            
+                            // Try one more time with even more force
+                            iframe.style.cssText = `
+                                height: ${newHeight}px !important;
+                                min-height: ${newHeight}px !important;
+                                max-height: ${newHeight}px !important;
+                                border-radius: 8px;
+                                width: 100%;
+                            `;
+                        }
+                    }, 200);
+                }
+                
+                // Simplified automatic detection (limited by cross-origin restrictions)
+                console.log('=��� Setting up form submission detection...');
+                console.log('G��n+� Note: Due to cross-origin restrictions, automatic detection is limited.');
+                console.log('=��� Use the manual controls in the bottom-right corner after form submission.');
+                
+                // Basic load event monitoring (may work in some cases)
+                iframe.addEventListener('load', function() {
+                    console.log('=��� Iframe loaded/reloaded');
+                    
+                    // Try to detect form response pages
+                    if (iframe.src && iframe.src.includes('formResponse')) {
+                        console.log('G�� Form submission detected via URL!');
+                        resizeIframe(700, 'Automatic: Form response detected');
+                        setTimeout(scrollToFormStart, 1000);
+                        formSubmittedResize = true;
+                        
+                        // Show success notification
+                        showNotification('G�� Form submitted! Page resized automatically.', '#28a745');
+                    }
+                });
+                
+                // Simple postMessage listener (backup detection)
+                window.addEventListener('message', function(event) {
+                    if (event.origin.includes('google.com') && event.data) {
+                        console.log('=�� Message from Google:', event.data);
+                        
+                        // Basic detection for form responses
+                        const data = typeof event.data === 'string' ? event.data : JSON.stringify(event.data);
+                        if (data.includes('formResponse') || data.includes('submitted')) {
+                            console.log('G�� Form submission detected via message!');
+                            resizeIframe(700, 'Automatic: PostMessage detection');
+                            setTimeout(scrollToFormStart, 1000);
+                            formSubmittedResize = true;
+                            
+                            // Show success notification
+                            showNotification('G�� Form submitted! Page resized automatically.', '#28a745');
+                        }
+                    }
+                });
+                
+                // Helper function for notifications
+                function showNotification(message, color = '#ff6b35') {
+                    const notif = document.createElement('div');
+                    notif.style.cssText = `
+                        position: fixed;
+                        top: 80px;
+                        right: 20px;
+                        background: ${color};
+                        color: white;
+                        padding: 12px 16px;
+                        border-radius: 8px;
+                        z-index: 1002;
+                        font-family: Arial, sans-serif;
+                        font-size: 13px;
+                        max-width: 250px;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                        animation: slideIn 0.3s ease-out;
+                    `;
+                    notif.innerHTML = message;
+                    document.body.appendChild(notif);
+                    
+                    setTimeout(() => {
+                        notif.style.animation = 'slideIn 0.3s ease-out reverse';
+                        setTimeout(() => {
+                            if (notif.parentNode) notif.parentNode.removeChild(notif);
+                        }, 300);
+                    }, 3000);
+                }
+                
+                // Enhanced manual controls for form resizing
+                const controlPanel = document.createElement('div');
+                controlPanel.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: rgba(255, 255, 255, 0.95);
+                    border: 2px solid #ff6b35;
+                    border-radius: 12px;
+                    padding: 12px;
+                    z-index: 1001;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                    font-family: Arial, sans-serif;
+                    min-width: 200px;
+                `;
+                
+                controlPanel.innerHTML = `
+                    <div style="font-weight: bold; color: #ff6b35; margin-bottom: 8px; text-align: center;">
+                        =��� Form Controls
+                    </div>
+                    <div style="font-size: 11px; color: #666; margin-bottom: 8px; text-align: center;">
+                        Click after form submission
+                    </div>
+                    <button id="shrinkForm" style="
+                        width: 100%;
+                        background: #ff6b35;
+                        color: white;
+                        border: none;
+                        padding: 8px 12px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-size: 12px;
+                        margin-bottom: 4px;
+                        font-weight: bold;
+                    ">G�� Form Submitted</button>
+                    <button id="expandForm" style="
+                        width: 100%;
+                        background: #478ac9;
+                        color: white;
+                        border: none;
+                        padding: 8px 12px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-size: 12px;
+                        margin-bottom: 4px;
+                    ">=�� Show Full Form</button>
+                    <button id="togglePanel" style="
+                        width: 100%;
+                        background: #666;
+                        color: white;
+                        border: none;
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        font-size: 10px;
+                    ">Hide Panel</button>
+                `;
+                
+                document.body.appendChild(controlPanel);
+                
+                // Wait a moment for DOM to be ready, then attach event listeners
+                setTimeout(function() {
+                    console.log('=��� Attaching button event listeners...');
+                
+                // Button functionality with error handling
+                const shrinkButton = document.getElementById('shrinkForm');
+                if (shrinkButton) {
+                    shrinkButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log('=��� Form Submitted button clicked!');
+                        
+                        try {
+                            resizeIframe(700, 'Manual: Form submitted');
+                            formSubmittedResize = true;
+                            this.style.background = '#28a745';
+                            this.innerHTML = 'G�� Resized!';
+                            console.log('G�� Form resize to 700px completed');
+                            
+                            setTimeout(() => {
+                                this.style.background = '#ff6b35';
+                                this.innerHTML = 'G�� Form Submitted';
+                            }, 2000);
+                        } catch (error) {
+                            console.error('G�� Error in Form Submitted button:', error);
+                            this.style.background = '#dc3545';
+                            this.innerHTML = 'G�� Error';
+                        }
+                    });
+                    console.log('G�� Form Submitted button event listener attached');
+                } else {
+                    console.error('G�� Could not find shrinkForm button');
+                }
+                
+                const expandButton = document.getElementById('expandForm');
+                if (expandButton) {
+                    expandButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log('=��� Show Full Form button clicked!');
+                        
+                        try {
+                            resizeIframe(13725, 'Manual: Show full form');
+                            formSubmittedResize = false;
+                            this.style.background = '#28a745';
+                            this.innerHTML = '=�� Expanded!';
+                            console.log('G�� Form resize to 13725px completed');
+                            
+                            setTimeout(() => {
+                                this.style.background = '#478ac9';
+                                this.innerHTML = '=�� Show Full Form';
+                            }, 2000);
+                        } catch (error) {
+                            console.error('G�� Error in Show Full Form button:', error);
+                            this.style.background = '#dc3545';
+                            this.innerHTML = 'G�� Error';
+                        }
+                    });
+                    console.log('G�� Show Full Form button event listener attached');
+                } else {
+                    console.error('G�� Could not find expandForm button');
+                }
+                
+                }, 100); // End of setTimeout for button event listeners
+                
+                // Panel toggle functionality
+                let panelVisible = true;
+                const toggleButton = document.getElementById('togglePanel');
+                const panelContent = controlPanel.children;
+                
+                toggleButton.addEventListener('click', function() {
+                    panelVisible = !panelVisible;
+                    
+                    if (panelVisible) {
+                        // Show panel
+                        for (let i = 0; i < panelContent.length - 1; i++) {
+                            panelContent[i].style.display = 'block';
+                        }
+                        controlPanel.style.padding = '12px';
+                        toggleButton.innerHTML = 'Hide Panel';
+                        toggleButton.style.background = '#666';
+                    } else {
+                        // Hide panel (show only toggle button)
+                        for (let i = 0; i < panelContent.length - 1; i++) {
+                            panelContent[i].style.display = 'none';
+                        }
+                        controlPanel.style.padding = '6px';
+                        toggleButton.innerHTML = '=��� Form Controls';
+                        toggleButton.style.background = '#ff6b35';
+                    }
+                });
+                
+                // Add helpful notification
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #ff6b35;
+                    color: white;
+                    padding: 12px 16px;
+                    border-radius: 8px;
+                    z-index: 1000;
+                    font-family: Arial, sans-serif;
+                    font-size: 13px;
+                    max-width: 300px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                    animation: slideIn 0.5s ease-out;
+                `;
+                
+                notification.innerHTML = `
+                    <div style="font-weight: bold; margin-bottom: 4px;">=��� Form Resize Helper</div>
+                    <div>After submitting the form, use the "Form Submitted" button in the bottom-right to resize the form area.</div>
+                `;
+                
+                // Add slide-in animation and iframe height enforcement
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    
+                    /* Force iframe height on initial load */
+                    iframe[src*="docs.google.com/forms"] {
+                        height: 13725px !important;
+                        min-height: 13725px !important;
+                    }
+                    
+                    /* Ensure container accommodates the iframe */
+                    .u-group-2 {
+                        min-height: 13765px !important;
+                    }
+                    
+                    .u-container-layout-3 {
+                        min-height: 13745px !important;
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                document.body.appendChild(notification);
+                
+                // Auto-hide notification after 8 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideIn 0.5s ease-out reverse';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 500);
+                }, 8000);
+                
+                // Cleanup after 30 minutes
+                setTimeout(function() {
+                    if (controlPanel.parentNode) {
+                        controlPanel.parentNode.removeChild(controlPanel);
+                    }
+                    console.log('=��� Form controls cleaned up after 30 minutes');
+                }, 30 * 60 * 1000);
+                
+                // Method 4: Focus/Activity detection
+                let clicks = 0;
+                const formArea = document.querySelector('.u-group-2');
+                
+                if (formArea) {
+                    formArea.addEventListener('click', function() {
+                        clicks++;
+                        lastActivity = Date.now();
+                        
+                        // If user has been clicking and then stops for a while, might indicate submission
+                        setTimeout(function() {
+                            const timeSinceLastActivity = Date.now() - lastActivity;
+                            if (timeSinceLastActivity > 3000 && clicks > 5 && !formSubmittedResize) {
+                                console.log('Potential form submission detected via activity pattern');
+                                setTimeout(scrollToFormStart, 1000);
+                                formSubmittedResize = true;
+                            }
+                        }, 4000);
+                    });
+                }
+                
+                // Method 5: Watch for URL hash changes
+                window.addEventListener('hashchange', function() {
+                    if (window.location.hash.includes('submitted') || window.location.hash.includes('success')) {
+                        setTimeout(scrollToFormStart, 1000);
+                        formSubmittedResize = true;
+                    }
+                });
+                
+                // Additional cleanup for old observers
+                setTimeout(function() {
+                    // Clean up any remaining intervals
+                    console.log('Final cleanup completed');
+                }, 30 * 60 * 1000);
+            }
         });
     </script>
     <meta name="generator" content="Nicepage 6.16.5, nicepage.com">
@@ -188,17 +670,15 @@
             </div>
           </div>
         </div>
-        <div class="u-align-center u-container-style u-group u-palette-1-base u-group-1">
+                <div class="u-align-center u-container-style u-group u-palette-1-base u-group-1">
           <div class="u-container-layout u-container-layout-2">
             <h3 class="u-text u-text-white u-text-3">Tournament Registration</h3>
-            <p class="u-text u-text-white u-text-4">Registration opens August 3, 2026. The 2026 registration form will be posted here.</p>
+            <p class="u-text u-text-white u-text-4">Complete the form below to register for the 2026 Las Vegas Open.</p>
           </div>
         </div>
         <div class="u-align-center u-container-style u-group u-white u-group-2">
-          <div class="u-container-layout u-container-layout-3 registration-placeholder">
-            <p><strong>Online registration opens Monday, August 3, 2026.</strong></p>
-            <p>Check back soon to register for the 2026 Las Vegas Open.</p>
-            <p>Hosted by Reigikai SKIF · Follow us on Facebook and Instagram for updates.</p>
+          <div class="u-container-layout u-container-layout-3">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd9Z4UBbpbIHWNfDU26C2f_kZeWY6WFJ_YXqzoC61edu8gGUg/viewform?embedded=true" width="100%" height="13725" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 8px; height: 13725px !important; min-height: 13725px;">Loading…</iframe>
           </div>
         </div>
         <p class="u-align-center u-text u-text-default u-text-5">
