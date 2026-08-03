@@ -65,6 +65,96 @@
   color: #555;
 }
 
+/* Tournament Schedule */
+.tournament-schedule {
+  background: #f8f9fa;
+  padding: 28px 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+  margin: 30px 0;
+  text-align: center;
+}
+
+.schedule-heading {
+  margin: 0 0 8px 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #478ac9;
+}
+
+.schedule-date {
+  margin: 0 0 20px 0;
+  font-size: 1rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.schedule-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 16px;
+  align-items: center;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-left: 4px solid #478ac9;
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+
+.schedule-time {
+  font-weight: 700;
+  color: #478ac9;
+  font-size: 1.05rem;
+}
+
+.schedule-event {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.schedule-subheading {
+  margin: 28px 0 14px 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #478ac9;
+}
+
+.ring-list {
+  max-width: 640px;
+}
+
+.ring-item {
+  grid-template-columns: 150px 1fr;
+  border-left-color: #f7931e;
+}
+
+.ring-item .schedule-time {
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+@media (max-width: 575px) {
+  .schedule-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .ring-item {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Registration Details */
 .flyer-gallery {
   display: flex;
@@ -355,12 +445,27 @@
   min-height: 200px;
 }
 
+.tournament-hero-banner {
+  width: 100%;
+  max-width: 720px;
+  margin: 24px auto 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+.tournament-hero-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .u-section-1 .u-text-1 {
-  margin: 60px auto 0;
+  margin: 28px auto 0;
 }
 
 .u-section-1 .u-text-2 {
-  margin: 20px auto 60px;
+  margin: 12px auto 40px;
 }
 
 .u-section-2 {

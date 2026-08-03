@@ -171,6 +171,43 @@
           </div>
         </nav>
       </div></header>
+
+    <!-- 2026 Las Vegas Open promo popup -->
+    <div id="lvoPromoOverlay" class="lvo-promo-overlay" hidden>
+      <div class="lvo-promo-dialog" role="dialog" aria-modal="true" aria-labelledby="lvoPromoTitle">
+        <button type="button" class="lvo-promo-close" id="lvoPromoClose" aria-label="Close">&times;</button>
+        <p id="lvoPromoTitle" class="lvo-promo-title">2026 Las Vegas Open</p>
+        <a href="2026-Las-Vegas-Open.html" class="lvo-promo-link">
+          <img src="images/2026-las-vegas-open-header.png" alt="2026 Las Vegas Open Karate Tournament — register now" width="1024" height="682">
+          <span class="lvo-promo-cta">Register Now →</span>
+        </a>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var storageKey = 'lvoPromoDismissed2026';
+        var overlay = document.getElementById('lvoPromoOverlay');
+        if (!overlay || sessionStorage.getItem(storageKey)) return;
+
+        function closePromo() {
+          overlay.hidden = true;
+          sessionStorage.setItem(storageKey, '1');
+          document.body.style.overflow = '';
+        }
+
+        overlay.hidden = false;
+        document.body.style.overflow = 'hidden';
+
+        document.getElementById('lvoPromoClose').addEventListener('click', closePromo);
+        overlay.addEventListener('click', function (e) {
+          if (e.target === overlay) closePromo();
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && !overlay.hidden) closePromo();
+        });
+      })();
+    </script>
+
     <section class="u-align-left u-clearfix u-container-align-left u-image u-section-1" id="carousel_3e8e" data-image-width="1980" data-image-height="1350">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="data-layout-selected u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
@@ -383,7 +420,7 @@
     
     <footer class="u-align-center u-clearfix u-container-align-center u-footer u-grey-80 u-footer" id="sec-e3f9"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="https://www.linkedin.com/in/rennielfrancia/" class="u-active-none u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-white u-btn u-btn-rectangle u-button-style u-hover-none u-none u-btn-1" target="_blank">MRF IT Services</a>
-        <p style="font-size: 10px; color: #999; margin-top: 10px; opacity: 0.7;">Last updated: Aug 03, 2026 at 03:37 AM</p>
+        <p style="font-size: 10px; color: #999; margin-top: 10px; opacity: 0.7;">Last updated: Aug 03, 2026 at 09:04 AM</p>
       </div></footer>
     <section class="u-backlink u-clearfix u-grey-80">
       <p class="u-text">

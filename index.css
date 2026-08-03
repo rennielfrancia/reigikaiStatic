@@ -1667,3 +1667,81 @@
 .u-nav-container-collapse .u-nav-item:nth-last-child(2) .u-nav-link::after {
   content: none !important;
 }
+/* 2026 Las Vegas Open homepage promo popup */
+.lvo-promo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.lvo-promo-overlay[hidden] {
+  display: none !important;
+}
+
+.lvo-promo-dialog {
+  position: relative;
+  width: min(920px, 100%);
+  background: #111;
+  border-radius: 10px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.lvo-promo-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lvo-promo-close:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.lvo-promo-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.lvo-promo-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.lvo-promo-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lvo-promo-cta {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  background: linear-gradient(45deg, #ff6b35, #f7931e);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.lvo-promo-link:hover .lvo-promo-cta {
+  background: linear-gradient(45deg, #ff8c5a, #ffa640);
+}
