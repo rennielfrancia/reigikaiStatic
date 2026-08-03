@@ -7,8 +7,8 @@
 // Payment plugin fields R–X are left untouched.
 // Not loaded by the static website — kept here for version control / edits.
 //
-// Sheets: FormResponses, DivisionList
-// Spreadsheet ID: 1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4
+// Sheets resolved via config.gs (FormResponses / Form Responses 1, DivisionList, etc.)
+// Spreadsheet ID: see REG_CONFIG in config.gs
 //
 // DivisionList columns A–E: Code | Age range | Gender | Ranking | Event (Kata|Kumite)
 
@@ -24,16 +24,21 @@ var DIVISION_COLS = {
 };
 
 function assignDivisionCode() {
-  var ss = SpreadsheetApp.openById("1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4");
-  var sheet = ss.getSheetByName("FormResponses");
-  var divisionSheet = ss.getSheetByName("DivisionList");
+  var ss = getRegistrationSpreadsheet();
+  var sheet = getFormResponsesSheet(ss);
+  var divisionSheet = getDivisionListSheet(ss);
   var lastRow = sheet.getLastRow();
   if (lastRow < 2) {
     Logger.log("No response rows to process.");
     return;
   }
 
-  var divisionData = divisionSheet.getRange(1, 1, divisionSheet.getLastRow(), 5).getValues();
+  var divisionLastRow = divisionSheet.getLastRow();
+  if (divisionLastRow < 1) {
+    throw new Error("Division list sheet is empty.");
+  }
+
+  var divisionData = divisionSheet.getRange(1, 1, divisionLastRow, 5).getValues();
   var c = DIVISION_COLS;
 
   for (var i = 2; i <= lastRow; i++) {

@@ -1,9 +1,7 @@
 // Registration Verification API (Google Apps Script)
 // Deployed as a web app; called by Registration-Verification.html via POST.
+// Requires config.gs in the same Apps Script project.
 // Not loaded by the static website — kept here for version control / edits.
-//
-// Sheet: FormResponses
-// Spreadsheet ID: 1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4
 
 // This handles GET requests (when someone visits the URL directly in browser)
 function doGet() {
@@ -23,7 +21,7 @@ function doPost(e) {
 
 // Your actual verification logic
 function verifyRegistration(e) {
-  var sheet = SpreadsheetApp.openById("1xQGr-yOPB_f5-mztIb9veFj3Ltu7K0HNTcSisV8KnS4").getSheetByName("FormResponses");
+  var sheet = getFormResponsesSheet();
   const paymentCode = e.parameter.paymentCode;
   
   const data = sheet.getDataRange().getValues();
